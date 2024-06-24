@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Password Generator</title>
+    <link rel="stylesheet" href="static/style.css">
+</head>
+<body>
+    <div class="container">
+        <h1>Password Generator</h1>
+        <form id="passwordForm" action="/generate" method="post">
+            <label for="length">Password Length:</label>
+            <input type="number" id="length" name="length" min="1" required>
+            <br><br>
+            <label for="complexity">Password Complexity:</label>
+            <select id="complexity" name="complexity">
+                <option value="low">Low (lowercase letters only)</option>
+                <option value="medium">Medium (letters and digits)</option>
+                <option value="high">High (letters, digits, and punctuation)</option>
+            </select>
+            <br><br>
+            <button type="submit">Generate Password</button>
+        </form>
+        {% if password %}
+            <h2>Your Generated Password:</h2>
+            <p id="generatedPassword">{{ password }}</p>
+            <p>Password Strength: {{ strength }}</p>
+            <button onclick="copyToClipboard()">Copy to Clipboard</button>
+        {% endif %}
+        <h3>Password History:</h3>
+        <ul>
+            {% for pwd in password_history %}
+                <li>{{ pwd }}</li>
+            {% endfor %}
+        </ul>
+    </div>
+    <script src="static/script.js"></script>
+</body>
+</html>
